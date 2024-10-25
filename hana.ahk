@@ -1,5 +1,3 @@
-isFirstRun := true
-
 Loop
 {
     SetTitleMatchMode, 2
@@ -7,47 +5,24 @@ Loop
     {
         WinActivate
         WinWaitActive, Hanafuda - Google Chrome
-        Send, {WheelDown 10}
         CoordMode, Mouse, Window
         Click, 979, 883 
-        Sleep, 4000 
+        Sleep, 4000  ;
     }
-
-    attempt := 0
-    success := false
-    while (attempt < 3) 
+    IfWinExist, MetaMask
     {
-        IfWinExist, MetaMask
-        {
-            success := true
-            WinActivate
-            WinWaitActive, MetaMask
-            Send, {WheelDown 10}
-            Sleep, 1690
-            if (isFirstRun)
-            {
-                Send, {Tab 13} 
-                isFirstRun := false 
-            }
-            else
-            {
-                Send, {Tab 14}
-            }
-
-            Sleep, 500
-            Send, {Enter}
-            break 
-        }
-        else
-        {
-            attempt++ 
-            Sleep, 420
-        }
+        WinActivate
+        WinWaitActive, MetaMask
+        Click, 381, 187  
+        CoordMode, Mouse, Window 
+        Send, {WheelDown 10} 
+        Sleep, 500
+        Click, 301, 726 
+        Sleep, 1000
     }
-
-    if (!success)
+    else
     {
-        MsgBox, Popup MetaMask tidak ada njir.
+        MsgBox, popup MetaMask gada.
     }
-    Sleep, 1000
+    Sleep, 3
 }
