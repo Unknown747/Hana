@@ -65,7 +65,6 @@ async function refreshBearerToken() {
         if (data.access_token) {
             bearerToken = data.access_token;
             fs.writeFileSync("bearer.txt", bearerToken);
-            console.log("Sesi diperbarui.");
             return true;
         } else {
             console.error("Gagal memperbarui Sesi:", data);
@@ -152,7 +151,7 @@ async function submitTransaction(txHash) {
 
         if (response.status !== 200 || (result.errors && result.errors[0].message === "Unauthorized")) {
             console.error("Unauthorized. Memperbarui sesi...");
-            const tokenRefreshed = await refreshToken();
+            const tokenRefreshed = await refreshBearerToken(); // memperbaiki nama fungsi
             return tokenRefreshed ? await submitTransaction(txHash) : false;
         }
 
