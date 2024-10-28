@@ -55,4 +55,4 @@ To run script for a long period of time without being interrupted by lost termin
 - MantodKaz
 
 #### DISCAIMER !!
-``I will not be held responsible for any direct or indirect damages caused by using this tool. use it only for educational purposes and you will not use it for any illegal activity.``
+``I will not be held responsible for any direct or indirect damages caused by using this tool. use it only for educational purposes and you will not use it for any brutal activity.``
