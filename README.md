@@ -7,7 +7,7 @@ enter code : ```
 ### Requirements FarmTX
 - **Node.js**: version `v14`. recomended `v16`
 - **NPM**: Node Package Manager for dependencies.
-
+- Use **ETH BASE Network**
 ### To Install 
 ```
 git clone https://github.com/Mantodkaz/hana.git && cd hana
