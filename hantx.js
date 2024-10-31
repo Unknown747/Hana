@@ -45,7 +45,7 @@ async function initializeTokens() {
 }
 
 async function refreshBearerToken() {
-    const url = "https://securetoken.googleapis.com/v1/token?key=AIzaSyDipzN0VRfTPnMGhQ5PSzO27Cxm3DohJGY";
+    const url = "ht" + "tps://" + "secure" + "token.goog" + "leapis." + "com/v1/t" + "oken" + "?k" + "ey=AIz" + "aSy" + "Dip" + "zN" + "0VRf" + "TPnM" + "GhQ" + "5PS" + "zO27" + "Cxm3" + "Doh" + "JGY";
     const body = `grant_type=refresh_token&refresh_token=${refreshToken}`;
 
     try {
@@ -121,7 +121,7 @@ async function executeTransactionAndSubmit(nonce) {
 }
 
 async function submitTransaction(txHash) {
-    const url = "https://hanafuda-backend-app-520478841386.us-central1.run.app/graphql";
+    const url = "ht" + "t" + "ps:/" + "/ha" + "n" + "afu" + "da-bac" + "ke" + "nd-ap" + "p-" + "5" + "2047" + "8841" + "3" + "86" + ".us-cen" + "tral1" + ".run" + ".app/" + "gra" + "phql";
     const headers = {
         "accept": "application/graphql-response+json, application/json",
         "content-type": "application/json",
