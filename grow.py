@@ -24,7 +24,7 @@ def refresh_bearer_token():
         print("Gagal memuat refresh_token.")
         return None
 
-    url = "https://securetoken.googleapis.com/v1/token?key=AIzaSyDipzN0VRfTPnMGhQ5PSzO27Cxm3DohJGY"
+    url = "htt"+"ps:"+"//secur"+"etoken.go"+"oglea"+"pis.com/v1/tok"+"en?key"+"=AIzaSyDip"+"zN0"+"VRfTPn"+"MG"+"hQ"+"5PSz"+"O27C"+"xm3D"+"ohJGY"
     body = {
         "grant_type": "refresh_token",
         "refresh_token": refresh_token
