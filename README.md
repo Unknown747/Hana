@@ -30,6 +30,7 @@ node hanatx.js
 ## Auto Claim GROW 
 ### Execute farm TX
 ```
+pip install requests
 python3 grow.py
 ```
 
