@@ -3,13 +3,14 @@ from web3 import Web3
 from dotenv import load_dotenv
 
 class HanaTransaction:
-    def __init__(self, private_key, token, api_key, provider, contract_address):
+    def __init__(self, private_key, token, api_key, provider, contract_address, chain):
         self.private_key = private_key
-        self.contract_address = Web3.to_checksum_address(contract_address)
         self.token = token
         self.api_key = api_key
-        self.bearer_token = ""
         self.web3 = Web3(Web3.HTTPProvider(provider))
+        self.contract_address = Web3.to_checksum_address(contract_address)
+        self.chain = chain
+        self.bearer_token = ""
         self.wallet = self.web3.eth.account.from_key(private_key).address
         self.contract_abi = [
             {
@@ -78,19 +79,29 @@ class HanaTransaction:
             "accept": "application/graphql-response+json, application/json",
             "content-type": "application/json",
             "authorization": f"Bearer {self.bearer_token}",
-            "priority": "u=1, i"
+            "priority": "u=1, i",
+            "priority": "u=1, i",
+            "sec-ch-ua": "\"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "Referer": "https://hanafuda.hana.network/",
+            "Referrer-Policy": "strict-origin-when-cross-origin",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
         }
 
         data = {
             "query": "mutation SyncEthereumTx($chainId: Int!, $txHash: String!) {\n  syncEthereumTx(chainId: $chainId, txHash: $txHash)\n}",
-            "variables": { "chainId": 42161, "txHash": f"0x{tx_hash}" },
+            "variables": { "chainId": self.chain, "txHash": f"0x{tx_hash}" },
             "operationName": "SyncEthereumTx"
         }
-
+        
         try:
             response = requests.post(url, headers=headers, data=json.dumps(data))
             response_json = response.json()
-
+            print(response_json)
             if 'errors' in response_json and any(error['extensions']['code'] == 'UNAUTHORIZED' for error in response_json['errors']):
                 print("Unauthorized error detected. Refreshing token...")
                 with self.lock:
@@ -170,15 +181,16 @@ elif not api_key:
     print("Error: API key not found.")
 else:
     print("======================================")
-    print("Enter 1 to use the Arbitrum network")
-    print("Enter 2 to use the Base network")
+    print("choose Network :")
+    print("(1) Arbitrum")
+    print("(2) Base")
     print("======================================")
-    type_network = int(input(""))
+    type_network = int(input("Please enter 1 or 2: "))
     if type_network == 1:
-        transaction = HanaTransaction(private_key, token, api_key, "https://arb1.arbitrum.io/rpc", "0xC5bf05cD32a14BFfb705Fb37a9d218895187376c")
+        transaction = HanaTransaction(private_key, token, api_key, "https://arb1.arbitrum.io/rpc", "0xC5bf05cD32a14BFfb705Fb37a9d218895187376c", 42161)
         transaction.execute_batch_transactions()
     elif type_network == 2:
-        transaction = HanaTransaction(private_key, token, api_key, "https://mainnet.base.org", "0xc5bf05cd32a14bffb705fb37a9d218895187376c")
+        transaction = HanaTransaction(private_key, token, api_key, "https://mainnet.base.org", "0xc5bf05cd32a14bffb705fb37a9d218895187376c", 8453)
         transaction.execute_batch_transactions()
     else:
         print("Invalid choice. Please choose either 1 or 2.")
