@@ -140,7 +140,7 @@ async function submitTransaction(txHash) {
 
     const body = JSON.stringify({
         query: "mutation SyncEthereumTx($chainId: Int!, $txHash: String!) {\n  syncEthereumTx(chainId: $chainId, txHash: $txHash)\n}",
-        variables: { chainId: 8453, txHash },
+        variables: { chainId: 137, txHash },
         operationName: "SyncEthereumTx"
     });
 
