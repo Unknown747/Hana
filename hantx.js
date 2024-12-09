@@ -2,7 +2,7 @@ const { JsonRpcProvider, Wallet, Contract, parseEther } = require("ethers");
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const fs = require("fs");
 
-const contractAddress = "0xc5bf05cd32a14bffb705fb37a9d218895187376c";
+const contractAddress = "0xC5bf05cD32a14BFfb705Fb37a9d218895187376c";
 const contractABI = [
     {
         "inputs": [],
@@ -12,7 +12,7 @@ const contractABI = [
         "type": "function"
     }
 ];
-const provider = new JsonRpcProvider("https://mainnet.base.org");
+const provider = new JsonRpcProvider("https://polygon-rpc.com");
 
 let refreshToken;
 let bearerToken;
